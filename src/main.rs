@@ -2,6 +2,7 @@ use actix_web::{get, App, HttpResponse, HttpServer, Responder, web::Data};
 use routes::{burger_route::{burger_id_info, create_burger, filter_bycat, filter_byvegan, get_latest, get_random_10_burgers, get_random_burger, search_burgers, search_byingr, search_byletter}, ingredient_route::{create_ingr, ingredient_id_info, list_ingredients, search_ingredients}};
 use services::db::Database;
 
+//Using important API modules
 mod models;
 mod services;
 mod routes;
@@ -13,6 +14,7 @@ async fn rootpage() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
+    //Initializing database
     let db = Database::init().await;
     let db_dat = Data::new(db);
 
@@ -32,8 +34,10 @@ async fn main() -> std::io::Result<()> {
     .service(get_latest)
     .service(ingredient_id_info)
     .service(list_ingredients)
+    //Adding routes
 )
     .bind(("localhost", 8000))?
     .run()
     .await
+    //Running server
 }

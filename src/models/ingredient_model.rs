@@ -16,6 +16,7 @@ pub struct IngredientReq {
     pub str_type: String,
 }
 
+//Implementing conversion from request input
 impl TryFrom<IngredientReq> for Ingredient {
     type Error = Box<dyn std::error::Error>;
 

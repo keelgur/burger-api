@@ -11,6 +11,7 @@ pub struct Database{
     ingredient: Collection<Ingredient>
 }
 
+//Implementing functions to operate with database which are used on each API endpoint 
 impl Database {
     pub async fn init() -> Self {
         let uri = match env::var("MONGO_URI"){

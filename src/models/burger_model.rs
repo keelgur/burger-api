@@ -33,6 +33,7 @@ pub struct BurgerReq {
     pub str_measureimperial: String,
 }
 
+//Implementing conversion from request input
 impl TryFrom<BurgerReq> for Burger {
     type Error = Box<dyn std::error::Error>;
 

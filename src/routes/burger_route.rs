@@ -4,6 +4,7 @@ use actix_web::{get, post, web::{Data, Json, Path}, HttpResponse};
 use crate::models::burger_model::{Burger, BurgerReq};
 use crate::services::db::Database;
 
+//Create a document
 #[post("/api/create_burger")]
 pub async fn create_burger(db: Data<Database>, req: Json<BurgerReq>) -> HttpResponse {
     match db
@@ -27,6 +28,7 @@ pub async fn create_burger(db: Data<Database>, req: Json<BurgerReq>) -> HttpResp
     }
 }
 
+//Search documents with given name
 #[get("/api/burger/search/{name}")]
 pub async fn search_burgers(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let name = p.into_inner().0;
@@ -36,6 +38,7 @@ pub async fn search_burgers(db:Data<Database>, p: Path<(String,)>)-> HttpRespons
     }
 }
 
+//Search documents which names start with given letter
 #[get("/api/burger/searchletter/{letter}")]
 pub async fn search_byletter(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let letter = "^".to_owned()+p.into_inner().0.as_str();
@@ -45,6 +48,7 @@ pub async fn search_byletter(db:Data<Database>, p: Path<(String,)>)-> HttpRespon
     }
 }
 
+//Listing all info about document with given id
 #[get("/api/burger/lookup/{id}")]
 pub async fn burger_id_info(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let id = p.into_inner().0;
@@ -54,6 +58,7 @@ pub async fn burger_id_info(db:Data<Database>, p: Path<(String,)>)-> HttpRespons
     }
 }
 
+//Get info of random document
 #[get("/api/burger/random")]
 pub async fn get_random_burger(db:Data<Database>)-> HttpResponse{
     match db.get_random_burger().await {
@@ -62,6 +67,7 @@ pub async fn get_random_burger(db:Data<Database>)-> HttpResponse{
     }
 }
 
+//Get info of 10 random documents
 #[get("/api/burger/randomselection")]
 pub async fn get_random_10_burgers(db:Data<Database>)-> HttpResponse{
     match db.get_random_10_burgers().await {
@@ -70,6 +76,7 @@ pub async fn get_random_10_burgers(db:Data<Database>)-> HttpResponse{
     }
 }
 
+//Get info of 3 most recently added documents
 #[get("/api/burger/latest")]
 pub async fn get_latest(db:Data<Database>)-> HttpResponse{
     match db.get_latest().await {
@@ -78,6 +85,7 @@ pub async fn get_latest(db:Data<Database>)-> HttpResponse{
     }
 }
 
+//Search documents with given ingredient
 #[get("/api/burger/filteri/{ingr}")]
 pub async fn search_byingr(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let ingr = p.into_inner().0;
@@ -87,6 +95,7 @@ pub async fn search_byingr(db:Data<Database>, p: Path<(String,)>)-> HttpResponse
     }
 }
 
+//Filter only is_vegan:true or is_vegan:false documents, based on given category
 #[get("/api/burger/filterv/{diet}")]
 pub async fn filter_byvegan(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let diet = p.into_inner().0;
@@ -106,6 +115,7 @@ pub async fn filter_byvegan(db:Data<Database>, p: Path<(String,)>)-> HttpRespons
     }
 }
 
+//Search documents with given category
 #[get("/api/burger/filterc/{category}")]
 pub async fn filter_bycat(db:Data<Database>, p: Path<(String,)>)-> HttpResponse{
     let category = p.into_inner().0;
