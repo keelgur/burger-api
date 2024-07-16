@@ -1,6 +1,7 @@
 # burger-api
 ## Usage
 ### Database connection
+Install MongoDB server : `https://www.mongodb.com/docs/manual/tutorial/install-mongodb-on-windows/#std-label-install-mdb-community-windows`
 Make sure you have connected to your local MongoDB server with `mongodb://localhost:27017/?directConnection=true` connection URI.
 ***This application currently works only with local instance of MongoDB database with that URI.***
 ### Endpoints
